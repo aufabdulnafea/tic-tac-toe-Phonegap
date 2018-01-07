@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/index.css">
+	</head>
+
+	<body>
+		
+
+		
+		<header>
+			<h3>XoGame</h3>
+		</header>
+
+		<div id="overlay" onclick="off()">
+			<div id="text"></div>
+		</div>
+		<table>
+			<tr>
+				<th id="00" onclick="tick(0, 0)"></th>
+				<th id="01" onclick="tick(0, 1)"></th>
+				<th id="02" onclick="tick(0, 2)"></th>
+			</tr>
+			<tr>
+				<th id="10" onclick="tick(1, 0)"></th>
+				<th id="11" onclick="tick(1, 1)"></th>
+				<th id="12" onclick="tick(1, 2)"></th>
+			</tr>
+			<tr>
+				<th id="20" onclick="tick(2, 0)"></th>
+				<th id="21" onclick="tick(2, 1)"></th>
+				<th id="22" onclick="tick(2, 2)"></th>
+			</tr>
+		</table>
+		<h3 id="firstwons" class="score red">0</h3>
+		<h3 id="secondwons" class="score blue">0</h3>
+		<h3 class="score about" onclick="about()">About</h3>
+
+		<h2 id="reset" onclick="newgame()">New Game</h2>
+		
+		<script src="js/index.js"></script>
+		<script>
+			
+			var areaArr = new Array();
+			var height = 3;
+			var width = 3;
+			var player = 0;
+			var free = 9;
+			var firstwons = 0;
+			var secondwons = 0;
+
+			for(var n = 0; n < height; n++) {
+				areaArr[n] = new Array();
+				for(var m = 0; m < width ; m++) {
+					areaArr[n][m] = 0;
+				}
+			}
+			function about(){
+				document.getElementById("overlay").style.display = "block";
+				document.getElementById("text").innerHTML = "This App is programmed by<br> <a onclick='window.open('http://www-stud.uni-due.de/~smabauff/', '_system');' > Abdul nafea auf</a>"
+			}
+			function off() {
+    			document.getElementById("overlay").style.display = "none";
+			}
+			function tick(x, y){
+				var cssid = x +''+ y;
+				if(areaArr[x][y] == 0) {
+					if(player == 0){
+						document.getElementById(cssid).className += 'red';
+						free--;
+						areaArr[x][y] = 1;
+						player = 1;
+						test(x, y);
+					}else if(player == 1){
+						document.getElementById(cssid).className += 'blue';
+						free--;
+						areaArr[x][y] = 2;
+						player = 0;
+						test(x, y);
+					}	
+				}
+			}
+
+			function won(i ,x, y){
+				if(i == 1){
+					document.getElementById("overlay").style.display = "block";
+					document.getElementById("text").innerHTML = 'No one Won!';
+					reset();
+				}else {
+					document.getElementById("overlay").style.display = "block";
+					if(areaArr[x][y] == 1){
+						firstwons += 1;
+						document.getElementById("firstwons").innerHTML =   firstwons;
+					}else {
+						secondwons += 1;
+						document.getElementById("secondwons").innerHTML = secondwons;
+					}
+					document.getElementById("text").innerHTML = 'Player ' + areaArr[x][y] + ' won!';
+					reset();
+				}
+			}
+			function reset(){
+				player = 0;
+				free = 9;
+				for(var n = 0; n < height; n++) {
+					areaArr[n] = new Array();
+					for(var m = 0; m < width ; m++) {
+						areaArr[n][m] = 0;
+						cssid = n + '' + m;
+						document.getElementById(cssid).className = '';
+					}
+				}
+			}
+			function test(x ,y) {
+				if(areaArr[0][y] == areaArr[1][y] && areaArr[0][y]  == areaArr[2][y] && areaArr[0][y] != 0 ){
+					won(0, x, y);
+				}
+				if(areaArr[x][0] == areaArr[x][1] && areaArr[x][0]  == areaArr[x][2] && areaArr[x][0] != 0 ){
+					won(0, x, y);
+				}
+				if(areaArr[0][0] == areaArr[1][1] && areaArr[0][0] == areaArr[2][2] && areaArr[0][0] != 0){
+					won(0, x, y);
+				}
+				if(areaArr[2][0] == areaArr[1][1] && areaArr[2][0] == areaArr[0][2] && areaArr[2][0] != 0){
+					won(0, x, y);
+				}else if (free == 0){
+					won(1);
+				}
+			}
+
+			function newgame(){
+				reset();
+				height = 3;
+				width = 3;
+				player = 0;
+				free = 9;
+				firstwons = 0;
+				secondwons = 0;
+				document.getElementById("firstwons").innerHTML =   firstwons;
+				document.getElementById("secondwons").innerHTML = secondwons;
+			}
+		</script>
+	</body>
+</html>

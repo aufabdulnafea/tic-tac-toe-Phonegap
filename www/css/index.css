@@ -1,0 +1,91 @@
+*{
+	padding: 0;
+	margin: 0;
+	font-family: sans-serif;
+}
+body {
+	background: #333;
+}
+header {
+	background: #999;
+	color: #333;
+}
+header h3 {
+	padding: 20px;
+	text-align: center;
+	box-shadow: 0px 1px 50px  #0d0d0d;
+}
+table {
+	width: 100%;
+	margin-top: 20px;
+}
+tr {
+	width: 100%;
+}
+th {
+	width: 33.3%;
+	background-color: rgba(0, 0, 0, 0.7);
+}
+th:after {
+	content: "";
+	display: block;
+	padding-bottom: 100%;
+}
+.red {
+	background: #ff8080;
+	color: #ff8080;
+}
+.blue {
+	background: #80bfff;
+	
+}
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+#text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 20px;
+    color: white;
+    transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	text-align: center;
+}
+#text a {
+	color: rgb(59, 174, 189);
+}
+.score {
+	margin-top: 10px;
+	width: 33.3%;
+	border: 2px solid #333;
+	float: left;
+	padding: 20px 0;
+	box-sizing: border-box;
+	color: rgb(241, 241, 241);
+	text-align: center;
+}
+.about {
+	background: rgb(241, 241, 241) ;
+	color: #333;
+	margin-bottom: 5px;
+	
+	
+}
+#reset {
+	padding: 20px;
+	background: rgb(163, 163, 163);
+	text-align: center;
+	clear: both;
+	color: #333;
+}
